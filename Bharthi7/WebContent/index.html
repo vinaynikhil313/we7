@@ -113,11 +113,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <div class="account-wall">
 
-<form class="form-signin">
+<form class="form-signin" method="get" action="controllerServlet">
 <input type="text" name="Role" class="form-control" placeholder="Role" required>
 <input type="text" name="U_ID"  class="form-control" placeholder="Email" required autofocus>
 <input type="password" name="Password" class="form-control" placeholder="Password" required>
-
+<input name="parameter" value= "login"> 
 <button class="btn btn-lg btn-primary btn-block" type="submit">
 Sign in</button>
 

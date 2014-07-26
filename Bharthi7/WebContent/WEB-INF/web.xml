@@ -20,60 +20,14 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     version="2.4">
 
-  <display-name>Welcome to Tomcat</display-name>
-  <description>
-     Welcome to Tomcat
-  </description>
-
-<!-- JSPC servlet mappings start -->
-
     <servlet>
-        <servlet-name>org.apache.jsp.index_jsp</servlet-name>
-        <servlet-class>org.apache.jsp.index_jsp</servlet-class>
+        <servlet-name>controller</servlet-name>
+        <servlet-class>com.jpmc.bharthi.controller.ControllerServlet</servlet-class>
+        
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>org.apache.jsp.index_jsp</servlet-name>
-        <url-pattern>/index.jsp</url-pattern>
+    <servlet-name>controller</servlet-name>
+    <url-pattern>/controllerServlet</url-pattern>
     </servlet-mapping>
- <servlet>
-        <servlet-name>once</servlet-name>
-        <servlet-class>once</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>once</servlet-name>
-        <url-pattern>/once</url-pattern>
-    </servlet-mapping>
- <servlet>
-        <servlet-name>twice</servlet-name>
-        <servlet-class>twice</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>twice</servlet-name>
-        <url-pattern>/twice</url-pattern>
-    </servlet-mapping>
- <servlet>
-        <servlet-name>add</servlet-name>
-        <servlet-class>addcookie</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>add</servlet-name>
-        <url-pattern>/addcookie</url-pattern>
-    </servlet-mapping>
-
-
- <servlet>
-        <servlet-name>serv</servlet-name>
-        <servlet-class>servjdbc</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>serv</servlet-name>
-        <url-pattern>/servjdbc</url-pattern>
-    </servlet-mapping>
-<!-- JSPC servlet mappings end -->
-
+      
 </web-app>

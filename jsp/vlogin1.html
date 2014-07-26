@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>Validation</title>
+		<script type="text/Javascript">
+		function validate()
+		{
+			var namere=new RegExp("^[a-zA-Z]{6,}$");
+			if(document.form1.Name.value=="")
+			{
+				alert("Name cannot be empty");
+				document.form1.Name.focus();
+				return false;
+			}
+			else if(!namere.test(document.form1.Name.value))
+			{
+				alert("Invalid Name");
+				document.form1.Name.focus();
+				return false;
+			}
+			if(document.form1.Password.value=="")
+			{
+				alert("Password cannot be empty");
+				document.form1.Password.focus();
+				return false;
+			}
+			else if((document.form1.Password.value).length<6)
+			{
+				alert("Invalid Password");
+				document.form1.Password.focus();
+				return false;
+			}
+			return true;
+		}
+		</script>
+	</head>
+	<body>
+		<form name="form1" method="get" action="/sushma/servjdbc">
+		<table align="center">
+		<tr>
+			<td>Login</td>	
+			<td><input type="text" name="sname" maxlength="30" size="15"></td>
+		</tr>
+		<tr>
+			<td>Password</td>	
+			<td><input type="password" name="password" maxlength="30" size="15"></td>
+		</tr>
+		<tr>
+			<td><input type="reset" value="Reset"></td>
+			<td><input type="submit" value="Submit"></td>
+		</tr>
+		</table>
+		</form>
+	</body>
+</html>

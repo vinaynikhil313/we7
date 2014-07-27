@@ -35,6 +35,14 @@
 							<div class="logo">
 								<a href="index.php"><img src="images/logo.png" alt="" /></a>
 							</div>	
+														<div class="btn-group" style="float:right;">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Logout<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="logout.php">Logout</a></li>
+  
+</div>
 						</div>
 					</div>
 	</div>
@@ -68,15 +76,9 @@
         <?php
         	
 			include 'connect.php';
-        	/*$con=mysqli_connect("localhost","root","cfg","we7");
-        	if (mysqli_connect_errno($con))
-	  		{
-	  			echo "Problem!!!";
-			  $_SESSION['userid']="Failed to connect to MySQL: ";
-	  		}*/
 	  		$sql="SELECT * FROM Teacher_Profile where Teacher_ID = '$_SESSION[userid]'";
         	$result = mysqli_query($con,$sql);
-        	$result=mysqli_query($con,$sql);
+        	//$result=mysqli_query($con,$sql);
 			if(!$result)
 			{
 				echo "Error\n";

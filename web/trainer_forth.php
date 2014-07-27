@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,6 +35,14 @@
 							<div class="logo">
 								<a href="index.php"><img src="images/logo.png" alt="" style=""/></a>
 							</div>	
+														<div class="btn-group" style="float:right;">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Logout<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="logout.php">Logout</a></li>
+  
+</div>
 						</div>
 					</div>
 	</div>
@@ -63,6 +72,33 @@
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
+
+
+
+
+   <?php
+        	
+			include 'connect.php';
+			if(isset($_POST['mod_att']))
+			{
+				$teacher_name=$_POST['teachername'];
+				$session_name=$_POST['sessionname'];
+				
+				$sql="UPDATE Training_Details SET Attendance_Count=Attendance_Count+1 WHERE Session_Name='$session_name' AND 
+				Teacher_ID IN (Select Teacher_ID FROM Teacher_Profile Where Teacher_Name='$teacher_name')";
+				$result = mysqli_query($con, $sql);
+				if($result)
+				{
+					echo "Attendance Updated Successfully\n";
+				}
+				else
+				{
+					echo "Attendance not Updated\n";
+				}
+			}
+			
+        ?>
+
         <div id="page-content-wrapper">
             <div class="container-fluid">
             		<div class="logo">
@@ -78,55 +114,34 @@
                          <h3>Please enter the school name </h3>
                      		
 
-					<div class="panel-body">
+						<form method="post" action="trainer_forth.php">
+						
+						<div class="panel-body">
     					<div class="table-responsive">
   							<table class="table">
    								<tr>
-   									<td colspan="1"><span>School </span></td>
-   									<td colspan="3"><span><input type="text" name="school"/></span></td>
+   									<td colspan="1"><span>Teacher Name </span></td>
+   									<td colspan="3"><span><input type="text" name="teachername"/></span></td>
    								</tr>
-   								 								
+   								<tr>
+   									<td colspan="1"><span>Session Name </span></td>
+   									<td colspan="3"><span><input type="text" name="sessionname"/></span></td>
+   								</tr>
+   										
    							
   							</table>
 						</div>
 
 					
-					<div class="table-responsive">
-  							<table class="table">
-   								<tr>
-   									<td colspan=""><span><b>Teacher ID</b></span></td>
-   									<td colspan=""><span><b>Teacher Name</b></span></td>
-   									<td colspan=""><span><b>Session Name</b></span></td>
-   									<td colspan=""><span><b>Training ID</b></span></td>   								</tr>
-   								<tr>
-   									<td colspan=""><span>T01</span></td>
-   									<td colspan=""><span>abc</span></td>
-   								</tr>
-   								<tr>
-   									<td colspan=""><span>T02 </span></td>
-   									<td colspan=""><span>def</span></td>
-   				
-   									
-   								</tr>
-   								
-   								
-   							
-  							</table>
-						</div>
+				
+					</div>
 
 
+			
+							<input type="submit" name="mod_att" value="Modify Attendance"/>
 
-
-
-
-
-
-
-
-
-
-
-
+					</form>
+			
 
 
 

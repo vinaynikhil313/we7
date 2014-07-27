@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,10 +35,34 @@
 							<div class="logo">
 								<a href="index.php"><img src="images/logo.png" alt="" style=""/></a>
 							</div>	
+														<div class="btn-group" style="float:right;">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Logout<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="logout.php">Logout</a></li>
+  
+</div>
 						</div>
 					</div>
 	</div>
-
+		        <?php
+        	
+			include 'connect.php';
+			
+				
+				
+				$sql="SELECT School FROM Teacher_Profile;";
+        		$result = mysqli_query($con,$sql);
+				if(!$result)
+				{
+					echo "Error\n";
+				}
+				
+				
+			
+			
+        ?>
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -50,7 +75,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="CC_first1.php">CC's profile</a>
+                    <a href="CC_first1.php">CC's Profile</a>
                 </li>
                 <li>
                     <a href="CC_second.php">View Teachers of the School </a>
@@ -76,7 +101,7 @@
                        
                         
 
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                      
                       
                          <h3>Schools list</h3>
                     
@@ -88,18 +113,14 @@
   							<table class="table">
    								<tr>
    									<td colspan=""><span><b>School Name</b></span></td>
-   									<td colspan=""><span><b>Location</b></span></td>
+   								
    								</tr>
+   						<?php while($row=mysqli_fetch_array($result)){ ?>
    								<tr>
-   									<td colspan=""><span>abc</span></td>
-   									<td colspan=""><span>def</span></td>
-   								</tr>
-   								<tr>
-   									<td colspan=""><span>abc </span></td>
-   									<td colspan=""><span>def</span></td>
-   				
+   									<td colspan=""><span><?php echo $row['School'] ?></span></td>
    									
    								</tr>
+						<?php }?>
    								
    								
    							
@@ -107,7 +128,7 @@
 						</div>
 
 
-
+	  <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
 
 
 

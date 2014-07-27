@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,6 +35,14 @@
 							<div class="logo">
 								<a href="index.php"><img src="images/logo.png" alt="" style=""/></a>
 							</div>	
+							<div class="btn-group" style="float:right;">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Logout<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="logout.php">Logout</a></li>
+  
+</div>
 						</div>
 					</div>
 	</div>
@@ -76,7 +85,46 @@
 
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                     
-                    
+
+				 <?php
+							if(isset($_POST['feed_submit']))
+							{
+								include 'connect.php';
+								$trainer_tid=$_SESSION['trainer_tid'];
+								
+								$i=0;
+								$feed=array();
+								for($i=1;$i<=9;$i++)
+								{
+									$feed[$i]=$_POST["feed".$i];
+									
+								
+								}
+							
+								$sql="INSERT INTO Observation_Trainer VALUES('$trainer_tid',' ','T125',$feed[1],$feed[2],$feed[3],$feed[4],$feed[5],$feed[6],$feed[7],'$feed[8]','$feed[9]','$feed[10]') ;";
+        						
+        						$result = mysqli_query($con,$sql);
+        						
+								if(!$result)
+								{
+									echo "Couldn't be Inserted {$temp_tid} \n";
+								}
+								else
+								{
+									
+									echo "Inserted Successfully\n";
+								
+								}
+								
+								
+							
+								$_SESSION['trainer_tid']="";
+							}
+						?>
+                   			
+
+  					
+                   
                     		
 
 					<div class="panel panel-default">
@@ -98,7 +146,7 @@
    									<td colspan="1"><span>School </span></td>
    									<td colspan="1"><span><input type="text" name="name_facilitator" width="50%"/></span></td>
    				
-   									<td colspan="1"><span>Topic </span></td>
+   									<td colspan="1"><span>Training ID </span></td>
    									<td colspan="1"><span><input type="text" name="train_location" width="50%"/></span></td>
    								</tr>
    								
@@ -109,6 +157,7 @@
 						</br></br>
 						</br>
 						</br>
+						<form method="post" action="trainer_third.php">
 						<div class="table-responsive">
   							<table class="table"   >
 								<tr>
@@ -191,6 +240,8 @@ Conceptual Clarity </span></td>
    							
   							</table>
 						</div>
+						<input type="submit" value="Submit the Form" name="feed_submit"/>
+						</form>
 						
 
   					</div>

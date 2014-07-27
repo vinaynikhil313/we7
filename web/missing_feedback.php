@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,8 +33,16 @@
 						<div class="header">
 							
 							<div class="logo">
-								<a href="index.html"><img src="images/logo.png" alt="" style=""/></a>
+								<a href="index.php"><img src="images/logo.png" alt="" style=""/></a>
 							</div>	
+														<div class="btn-group" style="float:right;">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Logout<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="logout.php">Logout</a></li>
+  
+</div>
 						</div>
 					</div>
 	</div>
@@ -50,13 +59,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">Teacher's Profile</a>
+                    <a href="teacher_first.php">Teacher's Profile</a>
                 </li>
                 <li>
-                    <a href="teacher_first.html">Give Feedback</a>
+                    <a href="teacher_second.php">Give Feedback</a>
                 </li>
                 <li>
-                    <a href="#">View Performance</a>
+                    <a href="teacher_third.php">View Performance</a>
                 </li>
                 
             </ul>
@@ -75,26 +84,95 @@
                         
 
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                    
-                    
+                     <?php
+        	
+			include 'connect.php';
+			//$result = mysql_query("SELECT Training_ID, Session_Name where Teacher_ID = '$U_ID' and Feedback_Given = 'N'");
+	  		$sql="SELECT Training_ID from Training_Details where Teacher_ID = '$_SESSION[userid]' and Feedback_Given = 'N'";
+        	$result = mysqli_query($con,$sql);
+        	//$result=mysqli_query($con,$sql);
+			if(!$result)
+			{
+				echo "Error\n";
+			}
+			//$row=mysqli_fetch_array($result);
+			
+        ?>
+                    <?php
+							if(isset($_POST['feed_submit']))
+							{
+								include 'connect.php';
+								$temp_tid=$_SESSION['temp_tid'];
+								$trainer=$_POST['name_facilitator'];
+								$i=0;
+								$feed=array();
+								for($i=1;$i<=9;$i++)
+								{
+									$feed[$i]=$_POST["feed".$i];
+									
+								
+								}
+							
+								$sql="INSERT INTO Feedback VALUES('$temp_tid','$trainer',$feed[1],$feed[2],$feed[3],$feed[4],$feed[5],$feed[6],$feed[7],'$feed[8]','$feed[9]') ;";
+        						//echo $sql;
+        						$result = mysqli_query($con,$sql);
+        						//$result=mysqli_query($con,$sql);
+								if(!$result)
+								{
+									echo "Couldn't be Inserted {$temp_tid} \n";
+								}
+								else
+								{
+									$sql="update Training_Details set Feedback_Given='Y' where Training_ID='$temp_tid';";
+        							$result = mysqli_query($con,$sql);
+        							//$result=mysqli_query($con,$sql);
+									if(!$result)
+									{
+										echo "Couldn't be Updated\n";
+									}
+									else
+									{
+										echo "Updated Successfully\n";
+									
+									}
+									echo "Inserted Successfully\n";
+								
+								}
+								
+								
+							
+								$_SESSION['temp_tid']="";
+							}
+						?>
                      <div class="dropdown">
   						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
    					 		Dropdown
    					 		<span class="caret"></span>
  						 </button>
   						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">ID1</a></li>
-    						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">ID2</a></li>
-    						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">ID3</a></li>
-    						
+  						<?php
+							$count=0;
+	
+  						while($row = mysqli_fetch_array($result)){
+  							if($count==0)
+  							{
+  								$_SESSION['temp_tid']=$row['Training_ID'];
+  								//echo $_SESSION['temp_tid'];
+  								$count++;
+  							}
+  							?>
+    						<li role="presentation"><a role="menuitem" tabindex="-1" href="missing_feedback.php"><?php echo $row['Training_ID'];?></a></li>
+    					<?php } ?>
   						</ul>
 					</div>
+                  
 					
 
 					<div class="panel panel-default">
  						<div class="panel-heading">
     						<h3 class="panel-title" >Training Feedback Form (F/G/TC/02/A)</h3>
   						</div>
+  									<form method="post" action="missing_feedback.php">
   					<div class="panel-body">
     					<div class="table-responsive">
   							<table class="table">
@@ -123,6 +201,7 @@
  							 <p>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Please enter the score in the following statements as per the given key:</p><br>
 						</blockquote>
 						<div class="table-responsive">
+						
   							<table class="table table-bordered"   >
    								<tr>
    									<td ><span>1</span></td>
@@ -156,6 +235,8 @@
 						</div>
 						</br>
 						</br>
+						
+
 						<div class="table-responsive">
   							<table class="table"   >
    								<tr>
@@ -205,7 +286,7 @@
    									<td ><span>7</span></td>
    									<td ><span>Learning of the session can be applied/used in the work place.</span></td>
    								
-   									<td><span><input type="text" name="feed1"/></span></td>
+   									<td><span><input type="text" name="feed7"/></span></td>
    									
    								</tr>
    								<tr>
@@ -228,10 +309,12 @@
    							
   							</table>
 						</div>
+						<input type="submit" name="feed_submit" value="Submit The Feedback"/>
 						
 
   					</div>
 					</div>
+					</form>
 
                   
                   

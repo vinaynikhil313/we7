@@ -47,7 +47,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <form class="form-signin" method="post" action="login2.php">
 <input type="text" name="Role" class="form-control" placeholder="Role" required>
-<input type="text" name="U_ID"  class="form-control" placeholder="Email" required autofocus>
+<input type="text" name="U_ID"  class="form-control" placeholder="Username" required autofocus>
 <input type="password" name="Password" class="form-control" placeholder="Password" required>
 
 <button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -73,10 +73,9 @@ Sign in</button>
 		<div class="wrap">
 				<!---start-da-slider----->
 						<div style="height:250px;">
-								<h2><span>We Build</span>Brand</h2>
-									<p>BHARTI FOUNDATION, the philanthropic arm of Bharti Enterprises was established in 2000 with a vision "To help underprivileged children and young people of our country realize their potential". BHARTI FOUNDATION, is an organization established under the Laws of India with charitable status pursuant to a "Deed of Trust" 
-</p>
-									<a href="#" class="da-link">Learnmore</a>
+								<h1 align="center"><span>We Spread </span> Quality Education</h1>
+
+
 									<a href="#portfolio" class="scroll"><span class="da-img"> </span> </a>
 								</div>
 				<!---//End-da-slider----->

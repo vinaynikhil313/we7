@@ -1,6 +1,6 @@
-<?php session_start();
-
-        	$con=mysqli_connect("localhost","root","cfg2014!","we7");
+<?php
+        	
+        	$con=mysqli_connect("localhost","CFG","","we7");
         	if (mysqli_connect_errno($con))
 	  		{
 	  			echo "Problem!!!";

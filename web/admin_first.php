@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,12 +33,26 @@
 						<div class="header">
 							
 							<div class="logo">
-								<a href="index.html"><img src="images/logo.png" alt="" style=""/></a>
+								<a href="index.php"><img src="images/logo.png" alt="" style=""/></a>
 							</div>	
 						</div>
 					</div>
 	</div>
+    <?php
+    	if(isset($_POST['select']))
+    	{
+    	
+			
+	  		$sql="SELECT * FROM Observation_CC where Teacher_ID = '$_POST[T_ID]'";
+        	$result = mysqli_query($con,$sql);
 
+						if(!$result)
+			{
+				echo "Error\n";
+			}
+			$row=mysqli_fetch_array($result);
+		}
+	?>
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -50,17 +65,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="CC_first1.html">CC's Profile</a>
+                    <a href="admin_first.php">View Charts of the Teachers</a>
                 </li>
-                <li>
-                    <a href="CC_second.html">View Teachers of the School</a>
-                </li>
-                <li>
-                    <a href="CC_third.html">View all Schools</a>
-                </li>
-                <li>
-                    <a href="CC_forth.html">Create an Observation</a>
-                </li>
+                
                 
             </ul>
         </div>
@@ -74,46 +81,21 @@
 							</div>	
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Please fill up the feedback form</h1>
-                        
-
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                    
-                    
-                    		
-
-					<div class="panel panel-default">
- 						<div class="panel-heading">
-    						<h3 class="panel-title" >Cluster Coordinator's Teacher Observation Sheet</h3>
-  						</div>
-  					<div class="panel-body">
-    					<div class="table-responsive">
+                        <h1>Teacher's Report</h1>
+                        <form method="post" action="admin_first.php" >
+                        <div class="table-responsive">
   							<table class="table">
-   								<tr>
-   									<td colspan="1"><span>Date</span></td>
-   									<td colspan="3"><span><input type="text" name="date"/></span></td>
-   								</tr>
-   								<tr>
-   									<td colspan="1"><span>Name of the Teacher</span></td>
-   									<td colspan="3"><span><input type="text" name="sess_name" width="100%" /></span></td>
-   								</tr>
-   								<tr>
-   									<td colspan="1"><span>Obs Sl No </span></td>
-   									<td colspan="1"><span><input type="text" name="name_facilitator" width="50%"/></span></td>
-   				
-   									<td colspan="1"><span>School </span></td>
-   									<td colspan="1"><span><input type="text" name="train_location" width="50%"/></span></td>
-   								</tr>
+   								 <tr>
+   								 	<td> <input type="text" placeholder="Enter the Teacher's ID" name="T_ID"</td>
+   								 </tr>
    								
-   								
-   							
-  							</table>
+
+ 							 </table>
 						</div>
-						</br></br>
-						</br>
-						</br>
-						<div class="table-responsive">
-  							<table class="table"   >
+						<input type="submit" value="Select the Name" name="select"/>
+						</form>
+                        <div class="table-responsive">
+  							<table class="table">
 								<tr>
 									<td> <span><b> Sl No </b></span> </td>
 									<td> <span><b> Observation Points </b></span> </td>
@@ -123,66 +105,68 @@
    									<td ><span>1</span></td>
    									<td ><span>TLM </span></td>
    								
-   									<td><span><input type="text" name="feed1"/></span></td>
+   									<td><span><input type="text" name="feed1" value="<?php echo $row[4]?>"/></span></td>
    									
    								</tr>
    								<tr>
    									<td ><span>2</span></td>
    									<td ><span>Seating Plan</span></td>
    									
-   									<td><span><input type="text" name="feed2"/></span></td>
+   									<td><span><input type="text" name="feed2" value="<?php echo $row[5]?>"/></span></td>
    									
    								</tr>
    								<tr>
    									<td ><span>3</span></td>
    									<td ><span>Was classroom teaching interactive, developing connect with students?</span></td>
-   									<td><span><input type="text" name="feed3"/></span></td>
+   									<td><span><input type="text" name="feed3" value="<?php echo $row[6]?>"/></span></td>
    									
    								</tr>
    								<tr>
    									<td ><span>4</span></td>
    									<td ><span>Were students comfortable and confident?</span></td>
    									
-   									<td><span><input type="text" name="feed4"/></span></td>
+   									<td><span><input type="text" name="feed4" value="<?php echo $row[7]?>"/></span></td>
    									
    								</tr>
    								<tr>
    									<td ><span>5</span></td>
    									<td ><span>Recently done classwork & homework; notebook correction & maintainance </span></td>
    									
-   									<td><span><input type="text" name="feed5"/></span></td>
+   									<td><span><input type="text" name="feed5" value="<?php echo $row[8]?>"/></span></td>
    									
    								</tr>
    								<tr>
    									<td ><span>6</span></td>
    									<td ><span>Quick Check for Learning</span></td>
    									
-   									<td><span><input type="text" name="feed6"/></span></td>
+   									<td><span><input type="text" name="feed6" value="<?php echo $row[9]?>"/></span></td>
    									
    								</tr>
    								<tr>
    									<td ><span>7</span></td>
    									<td ><span>Lesson plan dairy</span></td>
    								
-   									<td><span><input type="text" name="feed1"/></span></td>
+   									<td><span><input type="text" name="feed7" value="<?php echo $row[10]?>"/></span></td>
    									
    								</tr>
    								<tr>
    									<td ><span>8</span></td>
    									<td ><span>Curriculum Implementation</span></td>
    									
-   									<td><textarea name="feed8"> </textarea></td>
+   									 <td><span><input type="text" name="feed8" value="<?php echo $row[11]?>"/></span></td>
    									
    								</tr>
    							
   							</table>
 						</div>
-						
+                        
 
-  					</div>
-					</div>
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                    
+                    
+                    		
 
-                  
+				
                   
                     </div>
                 </div>
@@ -191,6 +175,12 @@
         <!-- /#page-content-wrapper -->
 
     </div>
+
+    	
+						
+    	
+    
+
     <!-- /#wrapper -->
 
     <!-- jQuery Version 1.11.0 -->

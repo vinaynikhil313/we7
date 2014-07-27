@@ -40,47 +40,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							
 							<div class="nav" style="float:right;">
 							<div class="container">
-<div class="row">
-<div class="col-sm-6 col-md-4 col-md-offset-4">
 
-<div class="account-wall">
-
-<form class="form-signin" method="post" action="login2.php">
-<input type="text" name="Role" class="form-control" placeholder="Role" required>
-<input type="text" name="U_ID"  class="form-control" placeholder="Email" required autofocus>
-<input type="password" name="Password" class="form-control" placeholder="Password" required>
-
-<button class="btn btn-lg btn-primary btn-block" type="submit">
-Sign in</button>
+Please Enter the details correctly
 
 
-</form>
 </div>
-<a href="#" class="text-center new-account">Create an account </a>
+														<div class="btn-group" style="float:right;">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+     Home<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="index.php">Home</a></li>
+  
 </div>
-</div>
-</div>
-							</div>
-
-							<!-----end-nav-------->
-							<div class="clear"> </div>
-						</div>
-					</div>
-				</div>
-		<!------end-header------------>
-		<!-- start slider -->
-<div class="slider_bg">
-		<div class="wrap">
-				<!---start-da-slider----->
-						<div style="height:250px;">
-								<h2><span>We Build</span>Brand</h2>
-									<p>BHARTI FOUNDATION, the philanthropic arm of Bharti Enterprises was established in 2000 with a vision "To help underprivileged children and young people of our country realize their potential". BHARTI FOUNDATION, is an organization established under the Laws of India with charitable status pursuant to a "Deed of Trust" 
-</p>
-									<a href="#" class="da-link">Learnmore</a>
-									<a href="#portfolio" class="scroll"><span class="da-img"> </span> </a>
-								</div>
-				<!---//End-da-slider----->
-		</div>
 </div>
 <!-----end-slider-------->
 <!--start portfolio------>

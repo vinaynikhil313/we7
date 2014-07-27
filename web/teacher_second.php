@@ -1,4 +1,6 @@
+<?php session_start();?>
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -34,6 +36,14 @@
 							<div class="logo">
 								<a href="index.php"><img src="images/logo.png" alt="" /></a>
 							</div>	
+														<div class="btn-group" style="float:right;">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Logout<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="logout.php">Logout</a></li>
+  
+</div>
 						</div>
 					</div>
 	</div>
@@ -64,6 +74,20 @@
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
+                <?php
+        	
+			include 'connect.php';
+			
+	  		$sql="SELECT Training_ID from Training_Details where Teacher_ID = '$_SESSION[userid]' and Feedback_Given = 'N'";
+        	$result = mysqli_query($con,$sql);
+
+			if(!$result)
+			{
+				echo "Error\n";
+			}
+
+			
+        ?>
         <div id="page-content-wrapper">
             <div class="container-fluid">
             		<div class="logo">
@@ -83,10 +107,15 @@
    					 		<span class="caret"></span>
  						 </button>
   						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    						<li role="presentation"><a role="menuitem" tabindex="-1" href="missing_feedback.php">ID1</a></li>
-    						<li role="presentation"><a role="menuitem" tabindex="-1" href="missing_feedback.php">ID2</a></li>
-    						<li role="presentation"><a role="menuitem" tabindex="-1" href="missing_feedback.php">ID3</a></li>
-    						
+  						<?php
+
+
+  						while($row = mysqli_fetch_array($result)) {
+  						
+  						?>
+  							
+    						<li role="presentation"><a role="menuitem" tabindex="-1" href="missing_feedback.php"><?php echo $row['Training_ID'];?></a></li>
+    					<?php } ?>
   						</ul>
 					</div>
                   

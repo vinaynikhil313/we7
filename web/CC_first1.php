@@ -35,6 +35,14 @@
 							<div class="logo">
 								<a href="index.php"><img src="images/logo.png" alt="" /></a>
 							</div>	
+														<div class="btn-group" style="float:right;">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Logout<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="logout.php">Logout</a></li>
+  
+</div>
 						</div>
 					</div>
 	</div>
@@ -54,10 +62,10 @@
                     <a href="#">CC's Profile</a>
                 </li>
                 <li>
-                    <a href="CC_second.php">View Teachers of a School</a>
+                    <a href="CC_second.php">View Teachers of the School</a>
                 </li>
                 <li>
-                    <a href="CC_third.php">View all schools </a>
+                    <a href="CC_third.php">View all the schools </a>
                 </li>
 		 <li>
                     <a href="CC_forth.php">Create an Observation </a>
@@ -69,7 +77,7 @@
         <!-- /#sidebar-wrapper -->
 
 	<?php
-	echo "Opened\n";
+	
 	include 'connect.php';
 	$sql = "SELECT * from CC_Profile where CC_ID = '$_SESSION[userid]'";
 	$result = mysqli_query($con, $sql);

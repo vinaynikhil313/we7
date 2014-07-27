@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,10 +34,36 @@
 							
 							<div class="logo">
 								<a href="index.php"><img src="images/logo.png" alt="" style=""/></a>
-							</div>	
+							</div>
+														<div class="btn-group" style="float:right;">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Logout<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="logout.php">Logout</a></li>
+  
+</div>	
 						</div>
 					</div>
 	</div>
+	        <?php
+        	
+			include 'connect.php';
+			if(isset($_POST['school_name']))
+			{
+				$school=$_POST['school'];
+				
+				$sql="SELECT Teacher_ID,Teacher_Name FROM Teacher_Profile where School='$school';";
+        		$result = mysqli_query($con,$sql);
+				if(!$result)
+				{
+					echo "Error\n";
+				}
+				
+				
+			}
+			
+        ?>
 
     <div id="wrapper">
 
@@ -50,7 +77,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="CC_first1.php">CC's profile</a>
+                    <a href="CC_first1.php">CC's Profile</a>
                 </li>
                 <li>
                     <a href="CC_second.php">View Teachers of the School </a>
@@ -76,12 +103,13 @@
                        
                         
 
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                        
                     
                          <h3>Please enter the school name </h3>
                      		
 
 					<div class="panel-body">
+					<form method="post" action="CC_second.php">
     					<div class="table-responsive">
   							<table class="table">
    								<tr>
@@ -92,7 +120,9 @@
    							
   							</table>
 						</div>
-
+						<input type="submit" value="Ok" name="school_name"/>
+					</form>
+	</br></br>
 					
 					<div class="table-responsive">
   							<table class="table">
@@ -100,17 +130,14 @@
    									<td colspan=""><span><b>Teacher ID</b></span></td>
    									<td colspan=""><span><b>Teacher Name</b></span></td>
    								</tr>
+   							<?php while($row=mysqli_fetch_array($result)){ ?>
    								<tr>
-   									<td colspan=""><span>T01</span></td>
-   									<td colspan=""><span>abc</span></td>
+   									<td colspan=""> <span> <?php echo $row['Teacher_ID'] ?> </span></td>
+   									<td colspan=""> <span> <?php echo $row['Teacher_Name']?> </span></td>
    								</tr>
-   								<tr>
-   									<td colspan=""><span>T02 </span></td>
-   									<td colspan=""><span>def</span></td>
-   				
-   									
-   								</tr>
-   								
+
+   							<?php	}
+   								?>
    								
    							
   							</table>
@@ -120,7 +147,7 @@
 
 
 
-
+		<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
 
 
 

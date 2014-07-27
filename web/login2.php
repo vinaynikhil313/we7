@@ -1,16 +1,18 @@
 <?php
 session_start();
-   $con=mysqli_connect("localhost","root","cfg2014!","we7");
+//   $con=mysqli_connect("localhost","root","cfg2014!","we7");
    // $con=mysqli_connect("http://ec2-54-254-195-240.ap-southeast-1.compute.amazonaws.com","root","cfg2014!","we7");
-        
+        include 'connect.php';
     $phpro_username=$_POST['U_ID'];
     $phpro_password=$_POST['Password'];
     $phpro_role=$_POST['Role'];
      
-		if (mysqli_connect_errno($con))
+		if (!mysqli_connect_errno($con))
 	  	{
-	  		echo "Problem!!!";
+	  		
+	  		header("Location: display_error.php");
 		  $_SESSION['userid']="Failed to connect to MySQL: ";
+		  
 	  	}
         $sql="SELECT Role,U_ID,Password FROM Login WHERE U_ID ='$phpro_username' AND Password ='$phpro_password' AND Role ='$phpro_role'";
 		$_SESSION['userid']=0;
@@ -20,7 +22,7 @@ session_start();
 			$result=mysqli_query($con,$sql);
 			if(!$result)
 			{
-				echo "Error\n";
+				header("Location: display_error.php");
 			}
 			$row=mysqli_fetch_array($result);
 			if (($row['U_ID'])!=NULL)
